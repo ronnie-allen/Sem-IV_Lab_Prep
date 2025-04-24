@@ -1,295 +1,203 @@
-# Exercise 2 -- Find-S Algorithm (Concept Learning)
+# EX-3: Univariate Plots for Data Exploration using Matplotlib and Seaborn
+---
 
-### ✅ **1\. Read the training data from CSV**
+## **Cheat Sheet for Univariate Plots with Matplotlib & Seaborn**
 
-```
-import pandas as pd
+### **1. Plotting with Seaborn and Matplotlib**
 
-# Load dataset
-df = pd.read_csv('training_data.csv')
+- **Seaborn (`sns`)**: High-level interface for drawing attractive statistical graphics.
+- **Matplotlib (`plt`)**: Low-level library for creating static, animated, and interactive visualizations.
 
-```
+#### **Key Seaborn Functions**
 
-* * * * *
+- **`sns.histplot()`**: Plot a histogram with an optional Kernel Density Estimation (KDE).
+  ```python
+  sns.histplot(data['column'], kde=True)
+  ```
 
-### ✅ **2\. Display the first and last 5 rows**
+- **`sns.boxplot()`**: Plot a box plot for visualizing the distribution of a variable.
+  ```python
+  sns.boxplot(x=data['column'])
+  ```
 
-```
-print(df.head())   # First 5 rows
-print(df.tail())   # Last 5 rows
+- **`sns.violinplot()`**: Combine aspects of box plot and KDE plot for showing distributions.
+  ```python
+  sns.violinplot(x=data['column'])
+  ```
 
-```
+- **`sns.kdeplot()`**: Plot a smooth curve (KDE) for the distribution of a continuous variable.
+  ```python
+  sns.kdeplot(data['column'], shade=True)
+  ```
 
-* * * * *
+#### **Key Matplotlib Functions**
 
-### ✅ **3\. Identify number of attributes and instances**
+- **`plt.figure()`**: Create a new figure.
+  ```python
+  plt.figure(figsize=(10, 6))
+  ```
 
-```
-num_attributes = df.shape[1] - 1   # Last column is the target
-num_instances = df.shape[0]
+- **`plt.subplot()`**: Create subplots within a single figure.
+  ```python
+  plt.subplot(2, 2, 1)
+  ```
 
-print("Number of attributes:", num_attributes)
-print("Number of instances:", num_instances)
-
-```
-
-* * * * *
-
-### ✅ **4\. Initialize the most specific hypothesis**
-
-```
-# Assuming all attributes are strings
-hypothesis = ['0'] * num_attributes
-
-```
-
--   `'0'` means "most specific" (nothing is accepted yet).
-
-* * * * *
-
-### ✅ **5\. FIND-S Algorithm Implementation**
-
-```
-def find_s_algorithm(data):
-    attributes = data.iloc[:, :-1].values  # All rows, all columns except last
-    target = data.iloc[:, -1].values       # Target values
-
-    # Step 1: Initialize the most specific hypothesis
-    hypothesis = ['0'] * attributes.shape[1]
-
-    print("\nInitial hypothesis:", hypothesis)
-
-    # Step 2: Iterate through training examples
-    for i, instance in enumerate(attributes):
-        if target[i].lower() == 'yes':  # Process only positive examples
-            for j in range(len(hypothesis)):
-                if hypothesis[j] == '0':               # If hypothesis is most specific, adopt attribute
-                    hypothesis[j] = instance[j]
-                elif hypothesis[j] != instance[j]:     # Generalize if attribute differs
-                    hypothesis[j] = '?'
-        print(f"After instance {i+1}: {hypothesis}")
-
-    return hypothesis
-
-```
-
-* * * * *
-
-### ✅ **6\. Display final hypothesis**
-
-```
-final_hypothesis = find_s_algorithm(df)
-print("\nFinal hypothesis learned:", final_hypothesis)
-
-```
-
-* * * * *
-
-### ✅ **7\. Test learned hypothesis on new instances**
-
-```
-def test_hypothesis(hypothesis, new_instance):
-    for h, val in zip(hypothesis, new_instance):
-        if h != '?' and h != val:
-            return False
-    return True
-
-# Example
-test_instance = ['Sunny', 'Warm', 'Normal', 'Strong', 'Warm', 'Same']
-result = test_hypothesis(final_hypothesis, test_instance)
-print("\nHypothesis result for test instance:", "Positive" if result else "Negative")
-
-```
-
-* * * * *
-
-🧾 **Find-S Algorithm Cheatsheet (with Function Logic)**
---------------------------------------------------------
-
-| **Step** | **Purpose** | **Function / Logic** | **Explanation** |
-| --- | --- | --- | --- |
-| Read CSV | Load training data | `pd.read_csv()` | Reads dataset into a DataFrame |
-| View rows | Preview data | `df.head()`, `df.tail()` | Shows first/last rows for inspection |
-| Data info | Attribute & instance count | `df.shape[0]`, `df.shape[1]` | `.shape` gives row and column count |
-| Init hypothesis | Start specific | `['0'] * n` | Most specific hypothesis (nothing accepted) |
-| Loop training | Go through each row | `for i, row in enumerate(data)` | Loop through dataset rows |
-| Process positive | Use only positive examples | `if target[i] == 'yes'` | Only update on positive examples |
-| Specific → General | Update hypothesis | `'0' → val`, `≠ → '?'` | Change from specific to more general |
-| Output progress | Track learning | `print(f"After instance {i+1}")` | See how hypothesis evolves |
-| Final result | Learned hypothesis | `return hypothesis` | Outputs learned concept |
-| Testing | Check new example | `if h != '?' and h != val` | If mismatch, it's not classified as positive |
-
-* * * * *
-
-### 📌 Example Dataset (`training_data.csv`)
-
-```
-Sky,Temp,Humidity,Wind,Water,Forecast,Enjoy
-Sunny,Warm,Normal,Strong,Warm,Same,Yes
-Sunny,Warm,High,Strong,Warm,Same,Yes
-Rainy,Cold,High,Strong,Warm,Change,No
-Sunny,Warm,High,Strong,Cool,Change,Yes
-
-```
-
+- **`plt.show()`**: Display the plot.
+  ```python
+  plt.show()
+  ```
 
 ---
 
-## 📌 **What is Find-S Algorithm?**
+### **2. Statistical Summary Functions**
 
-Find-S is a **supervised learning algorithm** that finds the **most specific hypothesis** that fits all the **positive examples** in a dataset.
+- **`data.describe()`**: Provides summary statistics (mean, median, standard deviation) for numerical columns.
+  ```python
+  data['column'].describe()
+  ```
 
-- It **ignores negative examples**.
-- It starts with the most specific hypothesis and **generalizes it only when needed**.
+- **`data.corr()`**: Compute pairwise correlation between variables.
+  ```python
+  data[['col1', 'col2']].corr()
+  ```
 
 ---
 
-## 🔍 **Code Breakdown & Explanation**
+### **3. Creating Univariate Plots for Data Analysis**
 
-### 🔹 Step 1: Import and Load the Dataset
+#### **Score Distribution Analysis**
+
+- **Histograms and KDE**: To understand the shape of the distribution for Math, Reading, and Writing scores.
+  ```python
+  sns.histplot(data['Math'], kde=True)
+  sns.histplot(data['Reading'], kde=True)
+  sns.histplot(data['Writing'], kde=True)
+  ```
+
+#### **Study Hours Analysis**
+
+- **Box Plot**: Helps visualize the distribution of scores across study hours.
+  ```python
+  sns.boxplot(x=data['StudyHours'], y=data['Math'])
+  ```
+
+- **Violin Plot**: Visualize the density of scores across study hours.
+  ```python
+  sns.violinplot(x=data['StudyHours'], y=data['Reading'])
+  ```
+
+- **Correlation**: To calculate the relationship between study hours and scores.
+  ```python
+  data[['StudyHours', 'Math', 'Reading']].corr()
+  ```
+
+#### **Sleep Patterns Analysis**
+
+- **Density Plot**: Visualizes the distribution of sleep hours.
+  ```python
+  sns.kdeplot(data['SleepHours'], shade=True)
+  ```
+
+- **Box Plot for Sleep Group vs. Scores**: Comparing the effect of sleep on academic performance.
+  ```python
+  sns.boxplot(x=data['SleepGroup'], y=data['Writing'])
+  ```
+
+- **Grouping Data**: Use `pd.cut()` to segment data into different groups based on sleep hours.
+  ```python
+  sleep_groups = pd.cut(data['SleepHours'], bins=[0, 4, 6, 8, 10, 12], labels=['0-4', '4-6', '6-8', '8-10', '10-12'])
+  data['SleepGroup'] = sleep_groups
+  ```
+
+---
+
+### **4. Example Code for Visualization**
+
+#### **1. Score Distribution Analysis**
+
 ```python
-import pandas as pd
-df = pd.read_csv('training_data.csv')
+# Histograms with KDE
+plt.figure(figsize=(12, 8))
+plt.subplot(2, 2, 1)
+sns.histplot(data['Math'], kde=True, color='blue')
+plt.title('Math Score Distribution')
+
+plt.subplot(2, 2, 2)
+sns.histplot(data['Reading'], kde=True, color='green')
+plt.title('Reading Score Distribution')
+
+plt.subplot(2, 2, 3)
+sns.histplot(data['Writing'], kde=True, color='red')
+plt.title('Writing Score Distribution')
+
+plt.tight_layout()
+plt.show()
+
+# Summary Statistics
+print(data['Math'].describe())
+print(data['Reading'].describe())
+print(data['Writing'].describe())
 ```
-- We import `pandas` for data handling.
-- `pd.read_csv()` loads the dataset into a DataFrame.
 
----
+#### **2. Study Hours Analysis**
 
-### 🔹 Step 2: Create the Find-S Function
 ```python
-def find_s_algorithm(data):
+# Box Plot and Violin Plot for Study Hours vs Scores
+plt.figure(figsize=(10, 6))
+
+plt.subplot(1, 2, 1)
+sns.boxplot(x=data['StudyHours'], y=data['Math'])
+plt.title('Box Plot: Study Hours vs Math Scores')
+
+plt.subplot(1, 2, 2)
+sns.violinplot(x=data['StudyHours'], y=data['Reading'])
+plt.title('Violin Plot: Study Hours vs Reading Scores')
+
+plt.tight_layout()
+plt.show()
+
+# Correlation between Study Hours and Scores
+study_hours_corr = data[['StudyHours', 'Math', 'Reading', 'Writing']].corr()
+print("Correlation between Study Hours and Scores:")
+print(study_hours_corr)
 ```
-- This function takes the **training data** as input.
 
----
+#### **3. Sleep Patterns Analysis**
 
-### 🔹 Step 3: Split Data into Attributes and Target
 ```python
-attributes = data.iloc[:, :-1].values
-target = data.iloc[:, -1].values
+# Density Plot of Sleep Hours
+plt.figure(figsize=(8, 6))
+sns.kdeplot(data['SleepHours'], shade=True, color='purple')
+plt.title('Density Plot of Sleep Hours')
+plt.xlabel('Sleep Hours')
+plt.ylabel('Density')
+plt.show()
+
+# Grouping students by sleep duration and analyzing performance
+sleep_groups = pd.cut(data['SleepHours'], bins=[0, 4, 6, 8, 10, 12], labels=['0-4', '4-6', '6-8', '8-10', '10-12'])
+data['SleepGroup'] = sleep_groups
+
+# Box plot of Sleep Group vs Writing Scores
+plt.figure(figsize=(10, 6))
+sns.boxplot(x=data['SleepGroup'], y=data['Writing'], palette="Set2")
+plt.title('Sleep Group vs Writing Scores')
+plt.show()
+
+# Analyzing performance of each sleep group
+sleep_performance = data.groupby('SleepGroup')['Writing'].describe()
+print("Sleep Group Performance Analysis:")
+print(sleep_performance)
 ```
-- `attributes`: All columns **except the last** (input features).
-- `target`: The **last column** (class label, e.g., Yes/No).
 
 ---
 
-### 🔹 Step 4: Initialize the Most Specific Hypothesis
-```python
-hypothesis = ['0'] * attributes.shape[1]
-```
-- Starts with the most specific hypothesis like:  
-  `['0', '0', '0', '0', '0', '0']`  
-- `'0'` means: no generalization yet — the hypothesis **rejects all**.
+### **5. Summary of Key Insights**
+
+- **Histograms and KDE**: These plots help in understanding the distribution of scores for different subjects.
+- **Box Plots and Violin Plots**: Visualize the spread of scores and help detect outliers or extreme values.
+- **Density Plots**: Ideal for understanding the continuous distribution of variables like sleep hours.
+- **Correlation Analysis**: Helps quantify the relationship between variables (e.g., study hours and academic performance).
 
 ---
 
-### 🔹 Step 5: Loop Through the Training Instances
-```python
-for i, instance in enumerate(attributes):
-    if target[i].lower() == 'yes':
-        ...
-```
-- Loop through each training instance.
-- Process **only positive examples** (`'yes'` class).
-
----
-
-### 🔹 Step 6: Update the Hypothesis
-```python
-for j in range(len(hypothesis)):
-    if hypothesis[j] == '0':
-        hypothesis[j] = instance[j]
-    elif hypothesis[j] != instance[j]:
-        hypothesis[j] = '?'
-```
-
-#### 👉 Logic:
-- **If hypothesis value is '0'**, replace it with the current instance value.
-- **If there’s a mismatch**, generalize with `'?'`.
-
-#### Example:
-If current hypothesis is  
-`['Sunny', 'Warm', 'Normal', 'Strong', 'Warm', 'Same']`  
-and the new instance is  
-`['Sunny', 'Warm', 'High', 'Strong', 'Warm', 'Same']`
-
-Then `'Normal'` vs `'High'` → mismatch → change to `'?'`
-
-Updated:  
-`['Sunny', 'Warm', '?', 'Strong', 'Warm', 'Same']`
-
----
-
-### 🔹 Step 7: Show Intermediate Hypothesis
-```python
-print(f"After instance {i+1}: {hypothesis}")
-```
-- Displays hypothesis after each positive example is processed.
-
----
-
-### 🔹 Step 8: Return Final Hypothesis
-```python
-return hypothesis
-```
-- After looping through all examples, we return the **learned hypothesis**.
-
----
-
-## 🧪 Testing the Hypothesis
-```python
-def test_hypothesis(hypothesis, new_instance):
-    for h, val in zip(hypothesis, new_instance):
-        if h != '?' and h != val:
-            return False
-    return True
-```
-
-### 👉 Logic:
-- For each attribute:
-  - If hypothesis says `'Sunny'`, and input is `'Rainy'` → Reject.
-  - If hypothesis says `'?'`, accept anything.
-- If all attributes **match or are '?'**, return **True** (positive match).
-
----
-
-## ✅ Final Example Output
-
-Given this dataset:
-```csv
-Sunny,Warm,Normal,Strong,Warm,Same,Yes
-Sunny,Warm,High,Strong,Warm,Same,Yes
-Rainy,Cold,High,Strong,Warm,Change,No
-Sunny,Warm,High,Strong,Cool,Change,Yes
-```
-
-The final hypothesis will be:
-```python
-['Sunny', 'Warm', '?', 'Strong', '?', '?']
-```
-
-### ✨ Meaning:
-This hypothesis accepts:
-- **Sunny** days
-- **Warm** temperature
-- Any humidity
-- **Strong** wind
-- Any water
-- Any forecast
-
----
-
-## 🎯 Summary Table
-
-| Part | What It Does | Why It Matters |
-|------|---------------|----------------|
-| `'0'` | Most specific start | Rejects everything |
-| `'Sunny'` or any value | Accepted value | Matched from positive example |
-| `'?'` | Generalized value | Allowed due to mismatch in positive examples |
-| Only 'Yes' examples used | Ignores noise | Focuses only on what makes it positive |
-| `test_hypothesis()` | Matches unseen data | Used to classify new instances |
-
----
-
-Made with by Ronnie Allen
+This **cheat sheet** and explanation will help you efficiently create and analyze visualizations using **Matplotlib** and **Seaborn** to explore univariate data. Feel free to use the code snippets to perform these tasks on your dataset and extract insights!
