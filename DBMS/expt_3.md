@@ -1,4 +1,3 @@
----
 
 # **Ex-3: Set Operations in SQL**
 
