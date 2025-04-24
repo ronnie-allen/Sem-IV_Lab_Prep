@@ -1,4 +1,3 @@
-```markdown
 # **Ex-5: Triggers**
 
 ✅ **Objective**:  
@@ -50,7 +49,6 @@ END IF;
 
 ### **1. Validate Course Code**
 **Ensure `coursecode` is a two-digit number (10-99).**  
-**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION check_course_code()
 RETURNS TRIGGER AS $$
@@ -72,7 +70,6 @@ EXECUTE FUNCTION check_course_code();
 
 ### **2. Restrict DML Operations for 'student1'**
 **Prevent `INSERT`, `UPDATE`, or `DELETE` by the user `student1`.**  
-**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION restrict_student1()
 RETURNS TRIGGER AS $$
@@ -94,7 +91,6 @@ EXECUTE FUNCTION restrict_student1();
 
 ### **3. Restrict Fees Below 10,000**
 **Block `INSERT` operation if `amount` is less than 10,000 in the `FeesPaid` table.**  
-**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION check_fees_amount()
 RETURNS TRIGGER AS $$
@@ -116,7 +112,6 @@ EXECUTE FUNCTION check_fees_amount();
 
 ### **4. Restrict Enquiry Dates After 25-Aug-2017**
 **Prevent `INSERT` operation if `enquirydate` is beyond 25-Aug-2017 in the `Enquiry` table.**  
-**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION restrict_enquiry_date()
 RETURNS TRIGGER AS $$
@@ -138,7 +133,6 @@ EXECUTE FUNCTION restrict_enquiry_date();
 
 ### **5. Prevent Incorrect Updates**
 **Block updates in `Enquiry` table where `OLD.name` is modified to a new value.**  
-**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION prevent_wrong_update()
 RETURNS TRIGGER AS $$
@@ -160,7 +154,6 @@ EXECUTE FUNCTION prevent_wrong_update();
 
 ### **6. Restrict Fees if Average Exceeds 50,000**
 **Block `INSERT` in `FeesPaid` table if the average `amount` exceeds 50,000.**  
-**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION check_avg_fees()
 RETURNS TRIGGER AS $$
@@ -185,7 +178,6 @@ EXECUTE FUNCTION check_avg_fees();
 
 ### **7. Restrict Negative Salaries**
 **Prevent negative values in the `salary` column during `INSERT` or `UPDATE` operations.**  
-**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION restrict_negative_salary()
 RETURNS TRIGGER AS $$
@@ -207,7 +199,6 @@ EXECUTE FUNCTION restrict_negative_salary();
 
 ### **8. Log Changes in the `Course` Table**
 **Audit updates in the `Course` table by logging changes into a separate audit table.**  
-**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION audit_course_updates()
 RETURNS TRIGGER AS $$
@@ -228,7 +219,6 @@ EXECUTE FUNCTION audit_course_updates();
 
 ### **9. Log Enquiry Insertions**
 **Track every `INSERT` operation in the `Enquiry` table by logging the action.**  
-**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION log_enquiry_insertions()
 RETURNS TRIGGER AS $$
@@ -262,5 +252,4 @@ EXECUTE FUNCTION log_enquiry_insertions();
 ✅ **Conclusion**:  
 Successfully demonstrated trigger implementations for automating database actions, enforcing rules, logging events, and maintaining data consistency.
 
----
-
+--- 
