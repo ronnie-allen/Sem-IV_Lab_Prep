@@ -26,6 +26,7 @@ Each folder will contain:
 - Exercise-wise implementations
 - Required datasets or inputs
 - Output samples and explanations
+- Cheatsheet for each exercise
 - `README.md` with instructions and key takeaways
 
 ---
