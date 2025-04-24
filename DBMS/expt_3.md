@@ -68,7 +68,7 @@ Bombay
 **SQL**:
 ```sql
 SELECT city FROM Company WHERE company_name = 'ACC'
-EXCEPT
+MINUS
 SELECT city FROM Company WHERE company_name = 'TATA';
 ```
 **Output**:
