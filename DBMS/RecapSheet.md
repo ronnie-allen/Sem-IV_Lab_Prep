@@ -55,9 +55,7 @@ Here’s an improved, more detailed and clear version of the CheatSheet for **DD
 
 ---
 
-Here’s a more detailed and clearer representation of the tables for **Experiment 5: Triggers** and **Experiment 6: Procedures and Functions**, along with improved syntax and explanations:
 
----
 
 ## **Experiment 5: Triggers**
 
