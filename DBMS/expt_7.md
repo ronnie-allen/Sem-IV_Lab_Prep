@@ -1,5 +1,4 @@
----
-**Ex-7: Aggregate and Built-in Functions**
+# Ex-7: Aggregate and Built-in Functions
 
 ✅ **Objective**:  
 Understand and use aggregate and built-in SQL functions to perform operations like summarizing data, manipulating strings, and working with numbers and dates.
@@ -324,3 +323,5 @@ SELECT ROUND(15.6789, 2) AS rounded_value, TRUNC(15.6789, 2) AS truncated_value 
 | **MIN**                  | Find the smallest value            | `SELECT MIN(column_name) FROM table_name;`         |
 | **AVG**                  | Find average value                 | `SELECT AVG(column_name) FROM table_name;`         |
 |
+---
+Made with 🫶🏻 by Franz Kingstein

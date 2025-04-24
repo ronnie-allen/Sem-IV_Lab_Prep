@@ -167,3 +167,4 @@ ID      FIRST_NAME    LAST_NAME    DATEOFBIR    PHONE_NUMBER
 ✅ **Conclusion**: Successfully learned and implemented TCL and DCL commands to manage transactions and control database access.
 
 ---
+Made with 🫶🏻 by Franz Kingstein

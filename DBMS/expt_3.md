@@ -196,3 +196,4 @@ Raj         Bombay
 Successfully demonstrated SQL **set operations** (UNION, INTERSECT, EXCEPT) and their application to combine and filter query results effectively.
 
 --- 
+Made with 🫶🏻 by Franz Kingstein

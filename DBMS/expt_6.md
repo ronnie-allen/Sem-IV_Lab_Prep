@@ -1,7 +1,4 @@
-
----
-
-# **Ex-6: Procedures and Functions**
+# Ex-6: Procedures and Functions
 
 ✅ **Objective**:  
 Learn and implement PL/SQL procedures and functions for data retrieval, calculations, and exception handling in database operations.
@@ -214,3 +211,4 @@ END;
 Successfully demonstrated the implementation of PL/SQL procedures and functions to retrieve data, calculate values, and handle exceptions effectively.
 
 ---
+Made with 🫶🏻 by Franz Kingstein

@@ -141,4 +141,6 @@ Denormalization involves combining tables to optimize database performance at th
 The database tables were successfully normalized, reducing redundancy and improving the structure for efficient operations.
 
 ---
+Made with 🫶🏻 by Franz Kingstein
+
 

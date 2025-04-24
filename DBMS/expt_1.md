@@ -170,3 +170,5 @@ Truncate Table | Remove all rows but keep structure | `TRUNCATE TABLE table_name
      ```
 
 ---
+
+Made with 🫶🏻 by Franz Kingstein

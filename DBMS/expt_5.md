@@ -203,3 +203,4 @@ EXECUTE FUNCTION check_avg_fees();
 Successfully demonstrated the working of database triggers to automate checks, maintain data integrity, and enforce rules.
 
 ---
+Made with 🫶🏻 by Franz Kingstein

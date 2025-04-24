@@ -1,6 +1,4 @@
----
-
-# **Ex-9: CRUD Operations Using MongoDB**
+# Ex-9: CRUD Operations Using MongoDB**
 
 ✅ **Objective**:  
 To perform **CRUD operations** (Create, Read, Update, Delete) using MongoDB and understand how MongoDB stores and retrieves data dynamically.
@@ -147,3 +145,4 @@ public class App {
 CRUD operations were performed successfully using MongoDB.
 
 ---
+Made with 🫶🏻 by Franz Kingstein

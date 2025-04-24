@@ -14,12 +14,14 @@ Whether you're revising for internals, preparing for lab submissions, or reviewi
 ### ✅ **[MLT Laboratory – Machine Learning Techniques](./MLT/README.md)**
 > Hands-on practice with Python-based machine learning techniques including data preprocessing, neural networks, SVM, decision trees, ensemble models, PCA, clustering, and more.
 
+### ✅ **[DBMS Laboratory -- Database Management Systems](./DBMS/README.md)**
+
+> Practice core database concepts including SQL DDL/DML, normalization, triggers, transactions, JDBC, PL/SQL, MongoDB operations, set operations, and joins.
 ---
 
 ## 🚧 Coming Soon...
 
 - 🔄 **CN Lab – Computer Networks**
-- 🔄 **DBMS Lab – Database Management Systems**
 
 
 Each folder will contain:

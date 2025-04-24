@@ -152,4 +152,4 @@ for lr in [0.0001, 0.001, 0.01, 0.1]:
 | Try Learning Rate | `Adam(learning_rate=...)` | Test convergence based on LR |
 
 * * * * *
-Made with by Ronnie Allen
+Made with 🫶🏻 by Ronnie Allen

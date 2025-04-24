@@ -147,4 +147,4 @@ for name, opt in optimizers.items():
 | Try Optimizers                        | `SGD()`, `Adam()`, etc.                          | Improve training convergence                                    |
 
 ---
-Made with By Ronnie Allen
+Made with 🫶🏻 by Ronnie Allen

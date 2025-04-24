@@ -152,4 +152,4 @@ print("SVR R² Score:", grid.score(X_test, y_test))
 | Regression Score       | `model.score()` (R²)      | Coefficient of determination for regression      |
 
 ---
-Made with by Ronnie Allen
+Made with 🫶🏻 by Ronnie Allen

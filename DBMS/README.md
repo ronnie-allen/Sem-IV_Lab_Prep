@@ -54,8 +54,12 @@ The **DBMS Laboratory** is all about diving into the world of databases and unle
 
 ---
 
-🎉 **Recap Cheat Sheet**: For quick reference to all techniques covered in the lab, access the **[Recap Cheat Sheet](./recap%20cheat%20sheet.md)**! 📜
+🎉 **Recap Cheat Sheet**: For quick reference to all techniques covered in the lab, access the **[Recap Cheat Sheet](./RecapSheet.md)**! 📜
 
 ---
 
 🌟 **Happy Learning!** 🌟
+
+-----
+
+Contributed with 🫶🏻 by Franz Kingstein !

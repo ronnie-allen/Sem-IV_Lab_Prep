@@ -150,3 +150,5 @@ WHERE e.city IS NULL;
 Successfully demonstrated SQL Join operations to retrieve data efficiently across related tables.
 
 ---
+Made with 🫶🏻 by Franz Kingstein
+

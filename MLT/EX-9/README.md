@@ -129,4 +129,4 @@ print("R² Score:", r2_score(yr_test, yr_pred))
 | RF Regression              | California Housing  | MSE, R² score                          |
 
 ---
-Made with by Ronnie Allen
+Made with 🫶🏻 by Ronnie Allen
