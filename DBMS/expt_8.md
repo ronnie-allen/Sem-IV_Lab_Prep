@@ -112,4 +112,3 @@ Connection created
 The working of JDBC connectivity was demonstrated successfully, and queries were executed without errors.
 
 ---
-Made with 🫶🏻 by Franz Kingstein
