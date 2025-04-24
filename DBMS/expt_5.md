@@ -1,7 +1,3 @@
-Here’s the markdown for **Ex-5: Triggers**, formatted exactly as the previous template for clarity and simplicity:
-
----
-
 # **Ex-5: Triggers**
 
 ✅ **1. Create a table for Courses**  
@@ -207,5 +203,3 @@ EXECUTE FUNCTION check_avg_fees();
 Successfully demonstrated the working of database triggers to automate checks, maintain data integrity, and enforce rules.
 
 ---
-
-Let me know if you need further clarification or refinements! 😊
