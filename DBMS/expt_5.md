@@ -1,29 +1,56 @@
+```markdown
 # **Ex-5: Triggers**
 
 ✅ **Objective**:  
-Demonstrate the working of Triggers to automate database operations, enforce rules, and maintain data integrity.
+Demonstrate the working of Triggers in automating database operations, enforcing rules, and maintaining data consistency.
 
 ---
 
-## **Trigger Scenarios**
+## **General Syntax for Triggers**
 
-### **1. Create a Table for Courses**
-- **Purpose**: Creating a table to store data about courses.  
-**SQL Syntax**:  
+### **1. Create Trigger**
+**Purpose**: Define a trigger that executes a function upon an event (INSERT, UPDATE, DELETE).  
+**Syntax**:  
 ```sql
-CREATE TABLE Course (
-    coursecode INT PRIMARY KEY,
-    coursename VARCHAR(255),
-    syllabus TEXT,
-    lastno INT
-);
+CREATE TRIGGER trigger_name
+{BEFORE | AFTER} {INSERT | UPDATE | DELETE} ON table_name
+FOR EACH ROW
+EXECUTE FUNCTION function_name();
 ```
 
 ---
 
-### **2. Trigger to Validate Course Code**
-- **Purpose**: Ensure course code is a two-digit number between 10 and 99.  
-**SQL Syntax**:  
+### **2. Create Trigger Function**
+**Purpose**: Define the procedural code that executes when the trigger is activated.  
+**Syntax**:  
+```sql
+CREATE OR REPLACE FUNCTION function_name()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Trigger logic (e.g., validation, logging, exception handling)
+    RETURN {NEW | OLD};
+END;
+$$ LANGUAGE plpgsql;
+```
+
+---
+
+### **3. Validation Using RAISE EXCEPTION**
+**Purpose**: Prevent invalid data manipulation by displaying a custom error message.  
+**Syntax**:  
+```sql
+IF condition THEN
+    RAISE EXCEPTION 'Custom error message';
+END IF;
+```
+
+---
+
+## **Trigger Functions Implemented**
+
+### **1. Validate Course Code**
+**Ensure `coursecode` is a two-digit number (10-99).**  
+**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION check_course_code()
 RETURNS TRIGGER AS $$
@@ -43,9 +70,9 @@ EXECUTE FUNCTION check_course_code();
 
 ---
 
-### **3. Restrict DML for 'student1'**
-- **Purpose**: Prevent `INSERT`, `UPDATE`, or `DELETE` operations on the `Enquiry` table by the user `student1`.  
-**SQL Syntax**:  
+### **2. Restrict DML Operations for 'student1'**
+**Prevent `INSERT`, `UPDATE`, or `DELETE` by the user `student1`.**  
+**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION restrict_student1()
 RETURNS TRIGGER AS $$
@@ -65,9 +92,9 @@ EXECUTE FUNCTION restrict_student1();
 
 ---
 
-### **4. Restrict Fees Below 10,000**
-- **Purpose**: Prevent inserting fees in the `FeesPaid` table if the amount is less than 10,000.  
-**SQL Syntax**:  
+### **3. Restrict Fees Below 10,000**
+**Block `INSERT` operation if `amount` is less than 10,000 in the `FeesPaid` table.**  
+**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION check_fees_amount()
 RETURNS TRIGGER AS $$
@@ -87,9 +114,9 @@ EXECUTE FUNCTION check_fees_amount();
 
 ---
 
-### **5. Restrict Enquiry Dates After 25-Aug-2017**
-- **Purpose**: Do not allow inserting enquiries with a date after 25-Aug-2017.  
-**SQL Syntax**:  
+### **4. Restrict Enquiry Dates After 25-Aug-2017**
+**Prevent `INSERT` operation if `enquirydate` is beyond 25-Aug-2017 in the `Enquiry` table.**  
+**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION restrict_enquiry_date()
 RETURNS TRIGGER AS $$
@@ -109,9 +136,9 @@ EXECUTE FUNCTION restrict_enquiry_date();
 
 ---
 
-### **6. Prevent Incorrect Updates**
-- **Purpose**: Ensure no updates in the `Enquiry` table change the value of the `name` column.  
-**SQL Syntax**:  
+### **5. Prevent Incorrect Updates**
+**Block updates in `Enquiry` table where `OLD.name` is modified to a new value.**  
+**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION prevent_wrong_update()
 RETURNS TRIGGER AS $$
@@ -131,9 +158,9 @@ EXECUTE FUNCTION prevent_wrong_update();
 
 ---
 
-### **7. Restrict Fees if Average Exceeds 50,000**
-- **Purpose**: Block inserting fees in the `FeesPaid` table if the average fee exceeds 50,000.  
-**SQL Syntax**:  
+### **6. Restrict Fees if Average Exceeds 50,000**
+**Block `INSERT` in `FeesPaid` table if the average `amount` exceeds 50,000.**  
+**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION check_avg_fees()
 RETURNS TRIGGER AS $$
@@ -156,10 +183,9 @@ EXECUTE FUNCTION check_avg_fees();
 
 ---
 
-## **Unique Solution Questions**
-
-✅ **1. Create a Trigger to Restrict Negative Salaries**  
-**SQL**:  
+### **7. Restrict Negative Salaries**
+**Prevent negative values in the `salary` column during `INSERT` or `UPDATE` operations.**  
+**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION restrict_negative_salary()
 RETURNS TRIGGER AS $$
@@ -179,14 +205,15 @@ EXECUTE FUNCTION restrict_negative_salary();
 
 ---
 
-✅ **2. Trigger to Audit Course Updates**  
-**SQL**:  
+### **8. Log Changes in the `Course` Table**
+**Audit updates in the `Course` table by logging changes into a separate audit table.**  
+**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION audit_course_updates()
 RETURNS TRIGGER AS $$
 BEGIN
     INSERT INTO CourseAudit(coursecode, updated_by, timestamp)
-    VALUES(OLD.coursecode, current_user, CURRENT_TIMESTAMP);
+    VALUES (OLD.coursecode, current_user, CURRENT_TIMESTAMP);
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -199,35 +226,15 @@ EXECUTE FUNCTION audit_course_updates();
 
 ---
 
-✅ **3. Prevent Deletion of High Fees Records**  
-**SQL**:  
-```sql
-CREATE OR REPLACE FUNCTION restrict_high_fees_deletion()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF OLD.amount > 50000 THEN
-        RAISE EXCEPTION 'Cannot delete records with fees above 50,000';
-    END IF;
-    RETURN OLD;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER restrict_deletion_trigger
-BEFORE DELETE ON FeesPaid
-FOR EACH ROW
-EXECUTE FUNCTION restrict_high_fees_deletion();
-```
-
----
-
-✅ **4. Trigger to Log Enquiry Insertions**  
-**SQL**:  
+### **9. Log Enquiry Insertions**
+**Track every `INSERT` operation in the `Enquiry` table by logging the action.**  
+**Code**:  
 ```sql
 CREATE OR REPLACE FUNCTION log_enquiry_insertions()
 RETURNS TRIGGER AS $$
 BEGIN
     INSERT INTO EnquiryLog(enquirydate, user, action)
-    VALUES(NEW.enquirydate, current_user, 'INSERT');
+    VALUES (NEW.enquirydate, current_user, 'INSERT');
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -240,41 +247,20 @@ EXECUTE FUNCTION log_enquiry_insertions();
 
 ---
 
-✅ **5. Restrict Updates to the Primary Key Column**  
-**SQL**:  
-```sql
-CREATE OR REPLACE FUNCTION restrict_pk_update()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF OLD.id <> NEW.id THEN
-        RAISE EXCEPTION 'Primary key updates are not allowed';
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
+## **CheatSheet for Triggers**
 
-CREATE TRIGGER restrict_pk_trigger
-BEFORE UPDATE ON TableName
-FOR EACH ROW
-EXECUTE FUNCTION restrict_pk_update();
-```
-
----
-
-## **CheatSheet**
-
-| **Trigger Type**               | **Purpose**                                                      | **Example Syntax**                                                                 |
-|--------------------------------|------------------------------------------------------------------|------------------------------------------------------------------------------------|
-| **BEFORE INSERT Trigger**      | Validate or block data before inserting                         | `BEFORE INSERT ON table_name FOR EACH ROW EXECUTE FUNCTION function_name();`       |
-| **BEFORE UPDATE Trigger**      | Validate or block updates to a table                           | `BEFORE UPDATE ON table_name FOR EACH ROW EXECUTE FUNCTION function_name();`       |
-| **BEFORE DELETE Trigger**      | Block or handle delete operations                              | `BEFORE DELETE ON table_name FOR EACH ROW EXECUTE FUNCTION function_name();`       |
-| **RAISE EXCEPTION**            | Stop action and display custom error message                   | `RAISE EXCEPTION 'Error message';`                                                |
-| **Validation Function**        | Use logic to validate data before completing an operation       | `IF NEW.column_name > value THEN ... RETURN NEW;`                                  |
-| **Audit Function**             | Log changes into separate log tables                           | `INSERT INTO log_table(columns) VALUES(values);`                                   |
+| **Trigger Type**               | **Purpose**                                                      | **Syntax**                                                                 |
+|--------------------------------|------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| **BEFORE INSERT Trigger**      | Validates or blocks data before it is inserted into a table      | `BEFORE INSERT ON table_name FOR EACH ROW EXECUTE FUNCTION function_name();` |
+| **BEFORE UPDATE Trigger**      | Validates or blocks changes during updates                      | `BEFORE UPDATE ON table_name FOR EACH ROW EXECUTE FUNCTION function_name();` |
+| **BEFORE DELETE Trigger**      | Blocks or manages delete operations                             | `BEFORE DELETE ON table_name FOR EACH ROW EXECUTE FUNCTION function_name();` |
+| **AFTER UPDATE Trigger**       | Logs or audits changes after data modification                  | `AFTER UPDATE ON table_name FOR EACH ROW EXECUTE FUNCTION function_name();` |
+| **RAISE EXCEPTION**            | Stops the operation and displays an error message               | `RAISE EXCEPTION 'Error message';`                                          |
 
 ---
 
 ✅ **Conclusion**:  
-Successfully demonstrated the working of database triggers to validate data, block invalid operations, and maintain data consistency.
+Successfully demonstrated trigger implementations for automating database actions, enforcing rules, logging events, and maintaining data consistency.
 
 ---
+
