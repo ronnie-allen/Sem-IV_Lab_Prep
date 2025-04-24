@@ -236,4 +236,3 @@ END;
 Successfully demonstrated the implementation of PL/SQL procedures and functions to retrieve data, calculate values, and handle exceptions effectively.
 
 ---
-Made with 🫶🏻 by Franz Kingstein
