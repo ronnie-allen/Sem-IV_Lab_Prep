@@ -78,10 +78,13 @@ Nagpur
 ✅ **3. Display the names of employees living in Nagpur and working for 'ACC'**  
 **SQL**:
 ```sql
-SELECT e.emp_name
-FROM Employee e
-JOIN Emp_Company ec ON e.emp_name = ec.emp_name
-WHERE e.city = 'Nagpur' AND ec.company_name = 'ACC';
+SELECT emp_name 
+FROM Employee 
+WHERE city = 'Nagpur'
+INTERSECT
+SELECT emp_name 
+FROM Emp_Company 
+WHERE company_name = 'ACC';
 ```
 **Output**:
 ```plaintext
