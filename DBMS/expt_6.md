@@ -4,37 +4,62 @@
 Learn and implement PL/SQL procedures and functions for data retrieval, calculations, and exception handling in database operations.
 
 ---
-
 ## **Concepts**
 
-1. **Procedure**  
-   - A stored block of SQL code that performs specific tasks like retrieving, updating, or manipulating data.  
-   - **Syntax**:  
-     ```sql
-     CREATE OR REPLACE PROCEDURE procedure_name (param1 IN datatype, param2 OUT datatype) AS
-     BEGIN
-         -- SQL statements
-         EXCEPTION
-             WHEN NO_DATA_FOUND THEN DBMS_OUTPUT.PUT_LINE('No data found.');
-             WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('An error occurred.');
-     END;
-     / 
-     ```
+### **1. Procedure**
+- A stored block of SQL code that performs specific tasks like retrieving, updating, or manipulating data.  
 
-2. **Function**  
-   - A stored block that returns a value based on input and operations performed.  
-   - **Syntax**:  
-     ```sql
-     CREATE OR REPLACE FUNCTION function_name (param1 IN datatype) RETURN datatype AS
-         result_variable datatype;
-     BEGIN
-         -- SQL statements
-         RETURN result_variable;
-         EXCEPTION
-             WHEN NO_DATA_FOUND THEN RETURN NULL;
-     END;
-     /
-     ```
+- **Syntax to Create a Procedure**:  
+    ```sql
+    CREATE OR REPLACE PROCEDURE procedure_name (param1 IN datatype, param2 OUT datatype) AS
+    BEGIN
+        -- SQL statements
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN DBMS_OUTPUT.PUT_LINE('No data found.');
+            WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('An error occurred.');
+    END;
+    / 
+    ```
+
+- **How to Call a Procedure**:  
+    ```sql
+    DECLARE
+        output_variable datatype;
+    BEGIN
+        procedure_name(input_value, output_variable);
+        DBMS_OUTPUT.PUT_LINE('Output: ' || output_variable);
+    END;
+    /
+    ```
+
+---
+
+### **2. Function**
+- A stored block that returns a value based on input and operations performed.  
+
+- **Syntax to Create a Function**:  
+    ```sql
+    CREATE OR REPLACE FUNCTION function_name (param1 IN datatype) RETURN datatype AS
+        result_variable datatype;
+    BEGIN
+        -- SQL statements
+        RETURN result_variable;
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN RETURN NULL;
+    END;
+    /
+    ```
+
+- **How to Call a Function**:  
+    ```sql
+    DECLARE
+        result datatype;
+    BEGIN
+        result := function_name(input_value);
+        DBMS_OUTPUT.PUT_LINE('Result: ' || result);
+    END;
+    /
+    ```
 
 ---
 
