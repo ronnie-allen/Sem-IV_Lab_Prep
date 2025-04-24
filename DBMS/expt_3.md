@@ -35,12 +35,12 @@ Demonstrate the usage of **set operations** (UNION, UNION ALL, INTERSECT, EXCEPT
    SELECT city FROM Employee;
    ```
 
-4. **EXCEPT (or MINUS)**  
+4. **MINUS (or EXCEPT)**  
    Returns rows from the first SELECT statement that are not in the second.  
    **Example**:  
    ```sql
    SELECT city FROM Company
-   EXCEPT
+   MINUS
    SELECT city FROM Employee;
    ```
 
