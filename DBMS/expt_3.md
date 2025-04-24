@@ -1,5 +1,3 @@
-Here’s a markdown for **Ex-3: Set Operations**, making the content concise and clearer as requested:
-
 ---
 
 # **Ex-3: Set Operations in SQL**
