@@ -1,5 +1,3 @@
----
-
 # **Ex-4: SQL JOIN Operations**
 
 ✅ **Objective**:  
