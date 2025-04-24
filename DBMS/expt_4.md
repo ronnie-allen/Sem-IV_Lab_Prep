@@ -1,5 +1,3 @@
-Here’s the markdown for **Ex-4: SQL JOIN Operations**, keeping it brief, clear, and concise:
-
 ---
 
 # **Ex-4: SQL JOIN Operations**
@@ -154,5 +152,3 @@ WHERE e.city IS NULL;
 Successfully demonstrated SQL Join operations to retrieve data efficiently across related tables.
 
 ---
-
-Let me know if you’d like me to refine this further! 😊
