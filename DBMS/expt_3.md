@@ -1,4 +1,3 @@
-
 # **Ex-3: Set Operations in SQL**
 
 ✅ **Objective**:  
@@ -51,7 +50,9 @@ Demonstrate the usage of **set operations** (UNION, UNION ALL, INTERSECT, EXCEPT
 ✅ **1. Display the cities of companies 'ACC' and 'TATA'**  
 **SQL**:
 ```sql
-SELECT city FROM Company WHERE company_name IN ('ACC', 'TATA');
+SELECT city FROM Company WHERE company_name = 'ACC'
+UNION
+SELECT city FROM Company WHERE company_name = 'TATA';
 ```
 **Output**:
 ```plaintext
@@ -61,11 +62,13 @@ Nagpur
 Bombay
 ```
 
+---
+
 ✅ **2. Find the cities where 'ACC' is located but not in 'TATA'**  
 **SQL**:
 ```sql
 SELECT city FROM Company WHERE company_name = 'ACC'
-MINUS
+EXCEPT
 SELECT city FROM Company WHERE company_name = 'TATA';
 ```
 **Output**:
@@ -75,16 +78,14 @@ CITY
 Nagpur
 ```
 
+---
+
 ✅ **3. Display the names of employees living in Nagpur and working for 'ACC'**  
 **SQL**:
 ```sql
-SELECT emp_name 
-FROM Employee 
-WHERE city = 'Nagpur'
+SELECT emp_name FROM Employee WHERE city = 'Nagpur'
 INTERSECT
-SELECT emp_name 
-FROM Emp_Company 
-WHERE company_name = 'ACC';
+SELECT emp_name FROM Emp_Company WHERE company_name = 'ACC';
 ```
 **Output**:
 ```plaintext
@@ -94,17 +95,17 @@ Amit
 Suresh
 ```
 
+---
+
 ✅ **4. List employees living in Bombay with a salary >1500**  
 **SQL**:
 ```sql
 SELECT e.emp_name
 FROM Employee e
-JOIN Emp_Company ec ON e.emp_name = ec.emp_name
 WHERE e.city = 'Bombay'
 INTERSECT
-SELECT e.emp_name
-From Employee e
-JOIN Emp_Company ec on e.emp_name - ec.emp_name
+SELECT ec.emp_name
+FROM Emp_Company ec
 WHERE ec.salary > 1500;
 ```
 **Output**:
@@ -115,13 +116,18 @@ Priya
 Raj
 ```
 
+---
+
 ✅ **5. Find employees living in Chennai and working with 'CMC'**  
 **SQL**:
 ```sql
 SELECT e.emp_name
 FROM Employee e
-JOIN Emp_Company ec ON e.emp_name = ec.emp_name
-WHERE e.city = 'Chennai' AND ec.company_name = 'CMC';
+WHERE e.city = 'Chennai'
+INTERSECT
+SELECT ec.emp_name
+FROM Emp_Company ec
+WHERE ec.company_name = 'CMC';
 ```
 **Output**:
 ```plaintext
@@ -130,14 +136,22 @@ EMP_NAME
 Neha
 ```
 
+---
+
 ✅ **6. Employees living in Nagpur, working in 'ACC', and in shift 'A'**  
 **SQL**:
 ```sql
 SELECT e.emp_name
 FROM Employee e
-JOIN Emp_Company ec ON e.emp_name = ec.emp_name
-JOIN Emp_Shift es ON e.emp_name = es.emp_name
-WHERE e.city = 'Nagpur' AND ec.company_name = 'ACC' AND es.shift = 'A';
+WHERE e.city = 'Nagpur'
+INTERSECT
+SELECT ec.emp_name
+FROM Emp_Company ec
+WHERE ec.company_name = 'ACC'
+INTERSECT
+SELECT es.emp_name
+FROM Emp_Shift es
+WHERE es.shift = 'A';
 ```
 **Output**:
 ```plaintext
@@ -146,10 +160,14 @@ EMP_NAME
 Amit
 ```
 
+---
+
 ✅ **7. Employees living in Nagpur or Bombay**  
 **SQL**:
 ```sql
-SELECT * FROM Employee WHERE city IN ('Nagpur', 'Bombay');
+SELECT emp_name FROM Employee WHERE city = 'Nagpur'
+UNION
+SELECT emp_name FROM Employee WHERE city = 'Bombay';
 ```
 **Output**:
 ```plaintext
@@ -177,6 +195,4 @@ Raj         Bombay
 ✅ **Conclusion**:  
 Successfully demonstrated SQL **set operations** (UNION, INTERSECT, EXCEPT) and their application to combine and filter query results effectively.
 
----
-
-Let me know if this format works or if you'd like further tweaks! 😊
+--- 
