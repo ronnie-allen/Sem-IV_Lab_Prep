@@ -1,8 +1,14 @@
 # **Ex-5: Triggers**
 
-✅ **1. Create a table for Courses**  
-**Concept**: A table is used to store data in an organized way. The `Course` table stores details about different courses.  
+✅ **Objective**:  
+Demonstrate the working of Triggers to automate database operations, enforce rules, and maintain data integrity.
 
+---
+
+## **Trigger Scenarios**
+
+### **1. Create a Table for Courses**
+- **Purpose**: Creating a table to store data about courses.  
 **SQL Syntax**:  
 ```sql
 CREATE TABLE Course (
@@ -13,17 +19,10 @@ CREATE TABLE Course (
 );
 ```
 
-**Explanation**:  
-- `coursecode`: Unique identifier for a course (Primary Key).  
-- `coursename`: Name of the course.  
-- `syllabus`: Text information about the course contents.  
-- `lastno`: Some associated numerical value for a course.
-
 ---
 
-✅ **2. Trigger to Validate Course Code**  
-**Concept**: Before inserting into the `Course` table, check that `coursecode` is a two-digit number between 10 and 99.
-
+### **2. Trigger to Validate Course Code**
+- **Purpose**: Ensure course code is a two-digit number between 10 and 99.  
 **SQL Syntax**:  
 ```sql
 CREATE OR REPLACE FUNCTION check_course_code()
@@ -42,15 +41,10 @@ FOR EACH ROW
 EXECUTE FUNCTION check_course_code();
 ```
 
-**Explanation**:  
-- **Trigger**: Runs automatically before inserting a row into the `Course` table.  
-- If `coursecode` is outside the range (10–99), it stops the insertion with an error message.
-
 ---
 
-✅ **3. Restrict DML for 'student1'**  
-**Concept**: Prevent any data operations (**INSERT**, **UPDATE**, **DELETE**) on the `Enquiry` table by the user `student1`.
-
+### **3. Restrict DML for 'student1'**
+- **Purpose**: Prevent `INSERT`, `UPDATE`, or `DELETE` operations on the `Enquiry` table by the user `student1`.  
 **SQL Syntax**:  
 ```sql
 CREATE OR REPLACE FUNCTION restrict_student1()
@@ -69,15 +63,10 @@ FOR EACH ROW
 EXECUTE FUNCTION restrict_student1();
 ```
 
-**Explanation**:  
-- **Trigger**: Automatically blocks data operations by `student1` with an error message.  
-- `current_user`: The username attempting the operation.
-
 ---
 
-✅ **4. Restrict Fees Below 10,000**  
-**Concept**: Prevent inserting payments in the `FeesPaid` table where the `amount` is less than 10,000.
-
+### **4. Restrict Fees Below 10,000**
+- **Purpose**: Prevent inserting fees in the `FeesPaid` table if the amount is less than 10,000.  
 **SQL Syntax**:  
 ```sql
 CREATE OR REPLACE FUNCTION check_fees_amount()
@@ -96,15 +85,10 @@ FOR EACH ROW
 EXECUTE FUNCTION check_fees_amount();
 ```
 
-**Explanation**:  
-- **Trigger**: Checks the `amount` before adding payments.  
-- If the `amount` is less than 10,000, the insertion is blocked with an error.
-
 ---
 
-✅ **5. Restrict Enquiry Dates After 25-Aug-2017**  
-**Concept**: Do not allow inserting enquiries with a date after 25-Aug-2017.
-
+### **5. Restrict Enquiry Dates After 25-Aug-2017**
+- **Purpose**: Do not allow inserting enquiries with a date after 25-Aug-2017.  
 **SQL Syntax**:  
 ```sql
 CREATE OR REPLACE FUNCTION restrict_enquiry_date()
@@ -123,15 +107,10 @@ FOR EACH ROW
 EXECUTE FUNCTION restrict_enquiry_date();
 ```
 
-**Explanation**:  
-- **Trigger**: Activates before adding enquiries.  
-- If the date exceeds 25-Aug-2017, insertion is blocked with a message.
-
 ---
 
-✅ **6. Prevent Incorrect Updates**  
-**Concept**: Block updates in the `Enquiry` table if the `name` column does not match the previous value.
-
+### **6. Prevent Incorrect Updates**
+- **Purpose**: Ensure no updates in the `Enquiry` table change the value of the `name` column.  
 **SQL Syntax**:  
 ```sql
 CREATE OR REPLACE FUNCTION prevent_wrong_update()
@@ -150,15 +129,10 @@ FOR EACH ROW
 EXECUTE FUNCTION prevent_wrong_update();
 ```
 
-**Explanation**:  
-- **Trigger**: Runs before updating a row in the `Enquiry` table.  
-- Compares `OLD.name` (existing name) and `NEW.name` (new name) to ensure consistency.
-
 ---
 
-✅ **7. Restrict Fees if Average Exceeds 50,000**  
-**Concept**: Block inserting fees in the `FeesPaid` table if the average fee exceeds 50,000.
-
+### **7. Restrict Fees if Average Exceeds 50,000**
+- **Purpose**: Block inserting fees in the `FeesPaid` table if the average fee exceeds 50,000.  
 **SQL Syntax**:  
 ```sql
 CREATE OR REPLACE FUNCTION check_avg_fees()
@@ -180,9 +154,110 @@ FOR EACH ROW
 EXECUTE FUNCTION check_avg_fees();
 ```
 
-**Explanation**:  
-- **Trigger**: Runs before adding payments to the `FeesPaid` table.  
-- Checks the average of all fees paid so far. If it’s above 50,000, insertion is blocked.
+---
+
+## **Unique Solution Questions**
+
+✅ **1. Create a Trigger to Restrict Negative Salaries**  
+**SQL**:  
+```sql
+CREATE OR REPLACE FUNCTION restrict_negative_salary()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.salary < 0 THEN
+        RAISE EXCEPTION 'Salary cannot be negative';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER salary_trigger
+BEFORE INSERT OR UPDATE ON Employees
+FOR EACH ROW
+EXECUTE FUNCTION restrict_negative_salary();
+```
+
+---
+
+✅ **2. Trigger to Audit Course Updates**  
+**SQL**:  
+```sql
+CREATE OR REPLACE FUNCTION audit_course_updates()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO CourseAudit(coursecode, updated_by, timestamp)
+    VALUES(OLD.coursecode, current_user, CURRENT_TIMESTAMP);
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER audit_trigger
+AFTER UPDATE ON Course
+FOR EACH ROW
+EXECUTE FUNCTION audit_course_updates();
+```
+
+---
+
+✅ **3. Prevent Deletion of High Fees Records**  
+**SQL**:  
+```sql
+CREATE OR REPLACE FUNCTION restrict_high_fees_deletion()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF OLD.amount > 50000 THEN
+        RAISE EXCEPTION 'Cannot delete records with fees above 50,000';
+    END IF;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER restrict_deletion_trigger
+BEFORE DELETE ON FeesPaid
+FOR EACH ROW
+EXECUTE FUNCTION restrict_high_fees_deletion();
+```
+
+---
+
+✅ **4. Trigger to Log Enquiry Insertions**  
+**SQL**:  
+```sql
+CREATE OR REPLACE FUNCTION log_enquiry_insertions()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO EnquiryLog(enquirydate, user, action)
+    VALUES(NEW.enquirydate, current_user, 'INSERT');
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER log_insertion_trigger
+AFTER INSERT ON Enquiry
+FOR EACH ROW
+EXECUTE FUNCTION log_enquiry_insertions();
+```
+
+---
+
+✅ **5. Restrict Updates to the Primary Key Column**  
+**SQL**:  
+```sql
+CREATE OR REPLACE FUNCTION restrict_pk_update()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF OLD.id <> NEW.id THEN
+        RAISE EXCEPTION 'Primary key updates are not allowed';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER restrict_pk_trigger
+BEFORE UPDATE ON TableName
+FOR EACH ROW
+EXECUTE FUNCTION restrict_pk_update();
+```
 
 ---
 
@@ -195,12 +270,11 @@ EXECUTE FUNCTION check_avg_fees();
 | **BEFORE DELETE Trigger**      | Block or handle delete operations                              | `BEFORE DELETE ON table_name FOR EACH ROW EXECUTE FUNCTION function_name();`       |
 | **RAISE EXCEPTION**            | Stop action and display custom error message                   | `RAISE EXCEPTION 'Error message';`                                                |
 | **Validation Function**        | Use logic to validate data before completing an operation       | `IF NEW.column_name > value THEN ... RETURN NEW;`                                  |
-| **Average Check**              | Validate data based on calculations (e.g., average fees)       | `SELECT AVG(column_name) INTO variable_name FROM table_name;`                      |
+| **Audit Function**             | Log changes into separate log tables                           | `INSERT INTO log_table(columns) VALUES(values);`                                   |
 
 ---
 
 ✅ **Conclusion**:  
-Successfully demonstrated the working of database triggers to automate checks, maintain data integrity, and enforce rules.
+Successfully demonstrated the working of database triggers to validate data, block invalid operations, and maintain data consistency.
 
 ---
-Made with 🫶🏻 by Franz Kingstein
