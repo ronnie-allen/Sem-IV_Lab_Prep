@@ -100,7 +100,12 @@ Suresh
 SELECT e.emp_name
 FROM Employee e
 JOIN Emp_Company ec ON e.emp_name = ec.emp_name
-WHERE e.city = 'Bombay' AND ec.salary > 1500;
+WHERE e.city = 'Bombay'
+INTERSECT
+SELECT e.emp_name
+From Employee e
+JOIN Emp_Company ec on e.emp_name - ec.emp_name
+WHERE ec.salary > 1500;
 ```
 **Output**:
 ```plaintext
