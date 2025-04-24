@@ -1,5 +1,3 @@
----
-
 # **Ex-5: Triggers**
 
 ✅ **Objective**:  
