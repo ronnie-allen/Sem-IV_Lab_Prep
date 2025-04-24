@@ -324,4 +324,3 @@ SELECT ROUND(15.6789, 2) AS rounded_value, TRUNC(15.6789, 2) AS truncated_value 
 | **AVG**                  | Find average value                 | `SELECT AVG(column_name) FROM table_name;`         |
 |
 ---
-Made with 🫶🏻 by Franz Kingstein
