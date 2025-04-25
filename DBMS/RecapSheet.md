@@ -1,14 +1,5 @@
-# Common Cheat Sheet for All 10 Experiments
-
-This cheat sheet summarizes the key concepts, syntax, and operations across all 10 experiments for quick reference.
-
----
 
 ## **Experiment 1: DDL and DML Commands**
-
-Here’s an improved, more detailed and clear version of the CheatSheet for **DDL Commands**:
-
----
 
 ### **CheatSheet: DDL (Data Definition Language)**
 
@@ -21,17 +12,36 @@ Here’s an improved, more detailed and clear version of the CheatSheet for **DD
 | **Drop Table**      | Permanently delete the table and all its data    | `DROP TABLE table_name;`                                                   |
 | **Truncate Table**  | Remove all rows but keep the table structure     | `TRUNCATE TABLE table_name;`                                               |
 
+### **CheatSheet: DML (Data Manipulation Language)**
+
+| **Command**        | **Purpose**                                      | **Syntax**                                                                 |
+|---------------------|--------------------------------------------------|-----------------------------------------------------------------------------|
+| **Insert Data**     | Insert new rows into a table                     | `INSERT INTO table_name (column1, column2, ...) VALUES (value1, value2, ...);` |
+| **Update Data**     | Modify existing rows in a table                  | `UPDATE table_name SET column1 = value1 WHERE condition;`                  |
+| **Delete Data**     | Remove specific rows from a table                | `DELETE FROM table_name WHERE condition;`                                  |
+| **Select Data**     | Retrieve data from one or more tables            | `SELECT column1, column2 FROM table_name WHERE condition;`                 |
+
 ---
 
-## **Experiment 2: SQL DDL and TCL Commands**
+## **Experiment 2: SQL DDL and TCL/DCL Commands**
 
-| **Command**         | **Purpose**                                   | **Syntax**                                      |
-|---------------------|-----------------------------------------------|------------------------------------------------|
-| **CREATE TABLE**    | Define a new table                            | `CREATE TABLE table_name (...);`              |
-| **ALTER TABLE**     | Add, modify, or remove a column               | `ALTER TABLE table_name ADD column_name datatype;` |
-| **DROP TABLE**      | Permanently delete a table                    | `DROP TABLE table_name;`                       |
-| **COMMIT**          | Save all changes                              | `COMMIT;`                                      |
-| **ROLLBACK**        | Undo all uncommitted changes                  | `ROLLBACK;`                                    |
+### **CheatSheet: TCL (Transaction Control Language)**
+
+| **Command**         | **Purpose**                                     | **Syntax**                                      |
+|---------------------|-------------------------------------------------|------------------------------------------------|
+| **COMMIT**          | Save all changes made during the transaction    | `COMMIT;`                                      |
+| **ROLLBACK**        | Undo all uncommitted changes                    | `ROLLBACK;`                                    |
+| **SAVEPOINT**       | Set a point within a transaction to roll back to| `SAVEPOINT savepoint_name;`                    |
+| **ROLLBACK TO SAVEPOINT** | Undo changes back to the savepoint           | `ROLLBACK TO SAVEPOINT savepoint_name;`        |
+
+---
+
+### **CheatSheet: DCL (Data Control Language)**
+
+| **Command**         | **Purpose**                                     | **Syntax**                                      |
+|---------------------|-------------------------------------------------|------------------------------------------------|
+| **GRANT**           | Give privileges to a user                       | `GRANT privilege ON object TO user;`           |
+| **REVOKE**          | Remove privileges from a user                   | `REVOKE privilege ON object FROM user;`        |
 
 ---
 
@@ -41,7 +51,7 @@ Here’s an improved, more detailed and clear version of the CheatSheet for **DD
 |---------------------|-----------------------------------------------|------------------------------------------------|
 | **UNION**           | Combine unique rows from multiple tables      | `SELECT ... UNION SELECT ...;`                |
 | **INTERSECT**       | Return common rows                            | `SELECT ... INTERSECT SELECT ...;`            |
-| **EXCEPT**          | Return rows in one table but not the other    | `SELECT ... EXCEPT SELECT ...;`               |
+| **MINUS (EXCEPT)**   | Return rows in one table but not the other     | `SELECT ... MINUS SELECT ...;`                |
 
 ---
 
@@ -55,8 +65,6 @@ Here’s an improved, more detailed and clear version of the CheatSheet for **DD
 
 ---
 
-
-
 ## **Experiment 5: Triggers**
 
 | **Trigger Type**     | **Purpose**                                  | **Example Syntax**                                                                 |
@@ -65,7 +73,6 @@ Here’s an improved, more detailed and clear version of the CheatSheet for **DD
 | **BEFORE UPDATE Trigger** | Validates or blocks changes during updates | ```sql BEFORE UPDATE ON table_name FOR EACH ROW EXECUTE FUNCTION function_name(); ``` |
 | **BEFORE DELETE Trigger** | Blocks deletion or handles specific scenarios | ```sql BEFORE DELETE ON table_name FOR EACH ROW EXECUTE FUNCTION function_name(); ``` |
 | **RAISE EXCEPTION**      | Throws custom error messages for invalid operations | ```sql RAISE EXCEPTION 'Error message'; ```                                        |
-| **Validation Example**   | Ensures data integrity (e.g., course code validation) | ```sql IF NEW.coursecode < 10 OR NEW.coursecode > 99 THEN RAISE EXCEPTION 'Invalid course code!'; ``` |
 
 ---
 
@@ -80,6 +87,7 @@ Here’s an improved, more detailed and clear version of the CheatSheet for **DD
 | **Variables**          | Declare variables for operations       | ```sql DECLARE variable_name datatype; ```                                    |
 
 ---
+
 ## **Experiment 7: Aggregate and Built-in Functions**
 
 | **Function Type**    | **Purpose**                                   | **Syntax**                                      |
@@ -124,3 +132,6 @@ Here’s an improved, more detailed and clear version of the CheatSheet for **DD
 
 ---
 
+### Notes for Oracle SQL*Plus:
+- Use `SET SERVEROUTPUT ON;` to display output from `DBMS_OUTPUT.PUT_LINE`.
+- `MINUS` is the equivalent of `EXCEPT` in Oracle.
