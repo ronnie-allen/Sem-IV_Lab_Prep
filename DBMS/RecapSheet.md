@@ -124,4 +124,3 @@ Here’s an improved, more detailed and clear version of the CheatSheet for **DD
 
 ---
 
-This cheat sheet compiles the critical commands and concepts across all 10 experiments for quick reference and efficient learning.
