@@ -17,6 +17,12 @@ Whether you're revising for internals, preparing for lab submissions, or reviewi
 ### ✅ **[DBMS Laboratory -- Database Management Systems](./DBMS/README.md)**
 
 > Practice core database concepts including SQL DDL/DML, normalization, triggers, transactions, JDBC, PL/SQL, MongoDB operations, set operations, and joins.
+
+### ✅ **[Cloud Computing Laboratory – AWS Fundamentals](./Cloud_Foundation/README.md)**
+
+> Practice core cloud concepts including IAM setup, VPC creation, EC2 management, EBS storage, RDS database deployment, web server hosting, load balancing, and auto scaling in AWS.
+
+
 ---
 
 ## 🚧 Coming Soon...
