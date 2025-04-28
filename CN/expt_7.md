@@ -88,6 +88,11 @@ Imagine you are in a **college**:
 ---
 
 # 🔵 **Switch Commands for Inter-VLAN Communication (Full Step-by-Step)**
+## 🖥️ **TOPOLOGY:**
+
+> A simple Inter-VLAN topology with One Router and One Switch with different VLANs 
+
+### ![Inter-VLAN Topology](./assets/ex7-Inter.png)
 
 ---
 
@@ -307,10 +312,17 @@ Router(config-if)# exit
 ### **Components Needed:**
 - **1 Switch**
 - **2 or more PCs** (to represent devices in the same VLAN)
+---
+## 🖥️ **TOPOLOGY:**
 
-### **Step-by-Step Configuration:**
+> A simple switch-based network where each port is assigned to a specific VLAN.  
+> (PCs belonging to the same VLAN communicate directly.)
+
+### ![Intra-VLAN Topology](./assets/ex7-Intra.png)
 
 ---
+
+### **Step-by-Step Configuration:**
 
 #### **Step 1: Create VLANs on the Switch**
 
