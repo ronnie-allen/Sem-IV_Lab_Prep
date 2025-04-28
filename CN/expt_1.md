@@ -1,4 +1,3 @@
-Yes! ✅  
 # 📄 EXP1.md - Network Troubleshooting Commands
 ---
 
