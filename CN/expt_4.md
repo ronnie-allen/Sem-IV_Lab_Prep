@@ -1,3 +1,4 @@
+```markdown
 # EXP-4 Static Routing (Updated for Serial Topology)
 
 🎯 **AIM:**  
