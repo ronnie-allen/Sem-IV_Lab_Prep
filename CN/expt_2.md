@@ -1,7 +1,3 @@
-Certainly! Below is an enhanced version of the README file that includes step-by-step explanations with examples for each of the topics:
-
----
-
 # Ex 2: IPv4 Addressing and Subnetting
 
 ## Aim:
