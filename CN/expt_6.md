@@ -23,6 +23,12 @@
 - Router2 (FastEthernet0/0) → PC1 ➡️ using **copper straight-through** cable.
 
 ---
+## 🖥️ **TOPOLOGY:**
+
+> A simple Inter-VLAN topology with One Router and One Switch with different VLANs 
+
+### ![OSPF Topology](./assets/OSPF%20EXP%206.png)
+
 
 ## 🛠 Step 2: Configure IP Addressing on PCs
 
