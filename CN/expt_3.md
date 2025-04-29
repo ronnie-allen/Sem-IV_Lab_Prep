@@ -37,7 +37,7 @@ In this exercise, we will cover the following important networking concepts:
 
 ### 1. Network Topology
 
-![Network Topology](./246b38fc-16de-4a32-8b9c-4ee0b7769a9b.png)
+![Network Topology](./assets/Dhcp%2CHTTP%2CDns.png)
 
 ---
 
