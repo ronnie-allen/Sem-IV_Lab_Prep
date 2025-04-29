@@ -2,6 +2,10 @@
 # 📄 EXP9.md — Configuration of RIPng (IPv6 Dynamic Routing)
 
 ---
+## Topology
+> Topology for Configuration of RIPng
+
+### ![Topology](./assets/IPV6%20exp9.png)
 
 ## 1. Key Concepts (Simple Definitions)
 
