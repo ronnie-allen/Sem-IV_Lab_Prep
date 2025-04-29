@@ -22,12 +22,12 @@ Whether you're revising for internals, preparing for lab submissions, or reviewi
 
 > Practice core cloud concepts including IAM setup, VPC creation, EC2 management, EBS storage, RDS database deployment, web server hosting, load balancing, and auto scaling in AWS.
 
+### ✅ **[Computer Networks Laboratory – Networking Fundamentals](./CN/README.md)**
+
+> Practice core networking concepts including basic troubleshooting commands, LAN simulation with HTTP/DNS/DHCP, IP addressing and subnetting, static and dynamic routing (RIP, OSPF, EIGRP, RIPng), VLAN setup, and LAN/WAN configurations using both IPv4 and IPv6.
+
 
 ---
-
-## 🚧 Coming Soon...
-
-- 🔄 **CN Lab – Computer Networks**
 
 
 Each folder will contain:

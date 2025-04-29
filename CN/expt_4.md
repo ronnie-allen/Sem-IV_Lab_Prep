@@ -1,4 +1,4 @@
-```markdown
+
 # EXP-4 Static Routing (Updated for Serial Topology)
 
 🎯 **AIM:**  
@@ -52,7 +52,7 @@ Default Gateways:
 ## 3. Router Configurations
 
 **Router0 (Left Router) Configuration:**
-```plaintext
+```bash
 Router> enable
 Router# configure terminal
 Router(config)# interface fastethernet 0/0
@@ -66,7 +66,7 @@ Router(config-if)# exit
 ```
 
 **Router1 (Right Router) Configuration:**
-```plaintext
+```bash
 Router> enable
 Router# configure terminal
 Router(config)# interface fastethernet 0/0
@@ -85,12 +85,12 @@ Router(config-if)# exit
 ## 4. Configure Static Routes
 
 **Router0:**
-```plaintext
+```bash
 Router0(config)# ip route 192.168.3.0 255.255.255.0 192.168.2.2
 ```
 
 **Router1:**
-```plaintext
+```bash
 Router1(config)# ip route 192.168.1.0 255.255.255.0 192.168.2.1
 ```
 
@@ -128,8 +128,5 @@ Router1(config)# ip route 192.168.1.0 255.255.255.0 192.168.2.1
 ✅ **RESULT:**  
 Thus, the communication between two PCs through two interconnected routers using static routing was successfully achieved according to the updated topology.
 
-```
 
 ---
-
-Would you also like me to send you this as a ready-to-download `.md` file? 📄 (I can generate and upload it for you immediately!) 🚀
