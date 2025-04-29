@@ -1,5 +1,4 @@
 
-```markdown
 # EXP-5 Dynamic Routing using RIP v1
 
 🎯 **AIM:**  
@@ -73,7 +72,7 @@ It enables routers to adapt to network changes, such as link failures or topolog
 ### 4. Enable Routing (RIP v1) on Routers
 
 **Router0 Configuration:**
-```plaintext
+```bash
 Router> enable
 Router# configure terminal
 Router(config)# router rip
@@ -85,7 +84,7 @@ Router(config)# exit
 ```
 
 **Router1 Configuration:**
-```plaintext
+```bash
 Router> enable
 Router# configure terminal
 Router(config)# router rip
@@ -98,7 +97,7 @@ Router(config)# exit
 ```
 
 **Router2 Configuration:**
-```plaintext
+```bash
 Router> enable
 Router# configure terminal
 Router(config)# router rip
@@ -114,7 +113,7 @@ Router(config)# exit
 ### 5. Activate Router Interfaces
 
 For each router interface:
-```plaintext
+```bash
 Router(config)# interface FastEthernet 0/0
 Router(config-if)# no shutdown
 Router(config-if)# exit
@@ -130,7 +129,7 @@ Router(config-if)# exit
 ### 6. Verify Routing Table
 
 Use the following command:
-```plaintext
+```bash
 Router# show ip route
 ```
 ✅ Check if all networks (192.168.1.0, 192.168.2.0, 192.168.3.0, 192.168.4.0, 192.168.5.0) are visible in each router's routing table.
